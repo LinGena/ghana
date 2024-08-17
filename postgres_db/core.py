@@ -4,14 +4,10 @@ import traceback
 from typing import Any, NoReturn
 import os
 import psycopg2
-from dotenv import load_dotenv
-
-load_dotenv(override=True)
 
 
 class PostgreSQL:
     def __init__(self):
-        print(os.getenv("POSTGRES_PASSWORD"))
         self.connection = psycopg2.connect(dbname=os.getenv("POSTGRES_DB_NAME"), user=os.getenv("POSTGRES_USER"),
                                            password=os.getenv("POSTGRES_PASSWORD"), host=os.getenv("HOST"))
 

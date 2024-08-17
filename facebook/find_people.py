@@ -27,7 +27,6 @@ class FacebookFindPeople(FacebookLogin):
                 src = self.get_page_content(link)
                 link = self.get_next_page_and_update_links_db(src)
                 write_to_file('next_link.txt', link)
-                time.sleep(random.randint(1,10))
         except Exception as e:
             self.register_error(e)
 
@@ -66,11 +65,11 @@ class FacebookFindPeople(FacebookLogin):
             soup = BeautifulSoup(response.text, 'html.parser')
             block_result = soup.find('div', id='BrowseResultsContainer')
             if not block_result:
-                time.sleep(3)
-                self.count_try += 1
-                if self.count_try > 3:
-                    raise Exception('На странице нет блока div с id=BrowseResultsContainer')
-                return self.get_page_content(link)
+                # time.sleep(3)
+                # self.count_try += 1
+                # if self.count_try > 1:
+                raise Exception('На странице нет блока div с id=BrowseResultsContainer')
+                # return self.get_page_content(link)
             self.count_try = 0
             return response.text
         else:
