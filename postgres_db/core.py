@@ -66,13 +66,14 @@ class PostgreSQLTable:
                 return inserted_row[0]
             else:
                 return None
-        except Exception:
-            print(traceback.format_exc())
-            time.sleep(3)
-            if retry < 3:
-                return self.insert_row(data, retry + 1)
-            else:
-                raise Exception("Error updating row: " + traceback.format_exc())
+        except Exception as ex:
+            print(ex)
+            # print(traceback.format_exc())
+            # time.sleep(3)
+            # if retry < 3:
+            #     return self.insert_row(data, retry + 1)
+            # else:
+            #     raise Exception("Error updating row: " + traceback.format_exc())
 
     def update_row(self, custom_field: str, custom_value: Any, data: dict, retry: int = 0) -> dict | None:
         try:
@@ -88,13 +89,14 @@ class PostgreSQLTable:
                 return updated_row[0]
             else:
                 return None
-        except Exception:
-            print(traceback.format_exc())
-            time.sleep(3)
-            if retry < 3:
-                return self.update_row(custom_field, custom_value, data, retry + 1)
-            else:
-                raise Exception("Error updating row: " + traceback.format_exc())
+        except Exception as ex:
+            print(ex)
+            # print(traceback.format_exc())
+            # time.sleep(3)
+            # if retry < 3:
+            #     return self.update_row(custom_field, custom_value, data, retry + 1)
+            # else:
+            #     raise Exception("Error updating row: " + traceback.format_exc())
 
     def delete_row(self, condition_field: str, condition_value: Any, retry: int = 0) -> None:
         try:

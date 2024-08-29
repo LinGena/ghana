@@ -5,4 +5,4 @@ venv/
 static/
 __pycache__/
 update_proxies.py
-content_from_har.py
+proxies/
