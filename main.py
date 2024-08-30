@@ -34,11 +34,13 @@ class Facebook():
             btn = self.is_image_on_screen('img/reload.png')
             if not btn:
                 raise Exception(ex)
+            self._click(btn.x, btn.y)
             self.count_try_reload += 1
             if self.count_try_reload >= 2:
                 raise Exception(f'[count_try_reload = 2] {ex}')
         else:
             raise Exception(ex)
+
 
     def run_scan(self):
         try:
@@ -51,10 +53,10 @@ class Facebook():
             self.get_har_file()
             AddLinks().run()
         except Exception as ex:
+            self.errors = self.errors - 1
+            print(ex)
             if 'critical' in str(ex):
                 raise Exception(ex)
-            self.errors = self.errors - 1
-            print(ex) 
                 
     def _click(self, x, y):
         pyautogui.moveTo(x, y, duration=2)
@@ -90,10 +92,13 @@ class Facebook():
         if not btn:
             if self.is_reconnect_devtools() and count_try<2:
                 return self.press_clear_btn(2)
+            else:
+                print('Я не попадаю в блок is_reconnect_devtools')
             print('Не вижу кнопку очистки! Откройте Dev Tools на вкладке Networks')
             raise Exception('critical')
         self._click(btn.x, btn.y)
         pyautogui.moveTo(btn.x - 20, btn.y, duration=1)
+
 
     def get_har_file(self):
         pyautogui.sleep(5)
