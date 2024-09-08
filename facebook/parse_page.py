@@ -31,7 +31,6 @@ class ParsePage():
                 self.result['groups'] = json.dumps(self.result['groups'])
             if 'likes' in self.result:
                 self.result['likes'] = json.dumps(self.result['likes'])
-            print('UPDATE',self.result['id'])
             PostgreSQLTable(self.db_table).update_row('id', self.result['id'], self.result)
 
     def get_result(self, page_html_content) -> dict:
